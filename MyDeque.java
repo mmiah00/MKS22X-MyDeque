@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -41,14 +44,33 @@ public class MyDeque<E>{
   }
   public E removeFirst(){
     try {
-      int was = data[start];
+      E was = data[start];
       start ++;
-      size --; 
+      size --;
       return was;
     }
     catch (NoSuchElementException e) { }
   }
-  public E removeLast(){ }
-  public E getFirst(){ }
-  public E getLast(){ }
+  public E removeLast(){
+    try {
+      E was = data[end];
+      end --;
+      size --;
+      return was;
+    }
+    catch (NoSuchElementException e) { }
+  }
+  public E getFirst(){
+    try {
+      return data[start];
+    }
+    catch (NoSuchElementException e) {}
+  }
+
+  public E getLast(){
+    try {
+      return data[end];
+    }
+    catch (NoSuchElementException e) {}
+  }
 }
