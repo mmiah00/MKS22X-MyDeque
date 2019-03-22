@@ -26,51 +26,54 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
-    try {
-      data[start - 1] = element;
-      start --;
-      size ++;
+    if (element == null) {
+      throw new NullPointerException ("Null");
     }
-    catch (NullPointerException e) {}
+    data[start - 1] = element;
+    start --;
+    size ++;
   }
 
   public void addLast(E element){
-    try {
-      data[end + 1] = element;
-      end ++;
-      size ++;
+    if (element == null) {
+      throw new NullPointerException ("Null");
     }
-    catch (NullPointerException e) { }
+    data[end + 1] = element;
+    end ++;
+    size ++;
   }
+
   public E removeFirst(){
-    try {
-      E was = data[start];
-      start ++;
-      size --;
-      return was;
+    if (size == 0) {
+      throw new NoSuchElementException ("Empty");
     }
-    catch (NoSuchElementException e) { }
+    E was = data[start];
+    start ++;
+    size --;
+    return was;
   }
+
   public E removeLast(){
-    try {
-      E was = data[end];
-      end --;
-      size --;
-      return was;
+    if (size == 0) {
+      throw new NoSuchElementException ("Empty");
     }
-    catch (NoSuchElementException e) { }
+    E was = data[end];
+    end --;
+    size --;
+    return was;
   }
+
   public E getFirst(){
-    try {
-      return data[start];
+    if (size == 0) {
+      throw new NoSuchElementException ("Empty");
     }
-    catch (NoSuchElementException e) {}
+    return data[start];
   }
 
   public E getLast(){
-    try {
-      return data[end];
+    if (size == 0) {
+      throw new NoSuchElementException ("Empty");
     }
-    catch (NoSuchElementException e) {}
+    return data[end];
   }
 }
