@@ -9,8 +9,8 @@ public class MyDeque<E>{
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
     int size = 0;
-    int start = 0;
-    int end = 0;
+    int start = initialCapacity / 2;
+    int end = initialCapacity / 2;
   }
 
   public int size(){
@@ -20,14 +20,36 @@ public class MyDeque<E>{
   public String toString(){
     String ans = "{";
     for (int i = start; i <= end; i ++) {
-      ans += data[i] + " ";
+      if (data[i] != null) {
+        ans += data[i] + " ";
+      }
+      else {
+        ans += "_ ";
+      }
     }
-    return ans;
+    return ans + "}";
+  }
+
+  @SuppressWarnings("unchecked")
+  private void resize () {
+    E[] a = (E[]) new Object [size * 2 + 1];
+    int half = size/2;
+    int i = half;
+    int x = start;
+    while (i <= size) {
+      a[i] = data[x];
+      x ++;
+      i ++;
+    }
+    data = a;
   }
 
   public void addFirst(E element){
     if (element == null) {
       throw new NullPointerException ("Null");
+    }
+    if (start - 1 < 0) {
+      resize ();
     }
     data[start - 1] = element;
     start --;
@@ -37,6 +59,9 @@ public class MyDeque<E>{
   public void addLast(E element){
     if (element == null) {
       throw new NullPointerException ("Null");
+    }
+    if (end + 1 > data.length) {
+      resize ();
     }
     data[end + 1] = element;
     end ++;
@@ -75,5 +100,14 @@ public class MyDeque<E>{
       throw new NoSuchElementException ("Empty");
     }
     return data[end];
+  }
+
+  public static void main (String[] args) {
+    MyDeque <Integer> test = new MyDeque <> (10);
+    test.addFirst (1);
+    test.addLast (2);
+    test.addFirst (3);
+    test.addLast (4);
+    System.out.println (test.toString ());
   }
 }
