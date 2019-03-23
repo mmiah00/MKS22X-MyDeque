@@ -9,8 +9,8 @@ public class MyDeque<E>{
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
     int size = 0;
-    int start = initialCapacity / 2;
-    int end = initialCapacity / 2;
+    int start = data.length / 2;
+    int end = data.length / 2;
   }
 
   public int size(){
