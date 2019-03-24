@@ -30,17 +30,47 @@ public class MyDeque<E>{
     return ans + "}";
   }
 
+  /*
   @SuppressWarnings("unchecked")
   private void resize () {
     E[] a = (E[]) new Object [size * 2 + data.length];
     int half = a.length/2;
-    int i = half;
-    int x = start;
-    while (i <= size) {
-      a[i] = data[x];
+    int i = start;
+    int x = start + half;
+    while (i < size) {
+      a[x] = data[i];
       x ++;
       i ++;
     }
+    data = a;
+  }
+  */
+  @SuppressWarnings("unchecked")
+  private void resizeLeft () {
+    E[] a = (E[]) new Object [5 + data.length];
+    int x = 5;
+    int i = start;
+    //int b = 0 ;
+    while (i <= end) {
+      a[x] = data[i];
+      x ++;
+      i ++;
+    }
+    start = 5;
+    data = a;
+  }
+
+  @SuppressWarnings("unchecked")
+  private void resizeRight () {
+    E[] a = (E[]) new Object [5 + data.length];
+    int x = start;
+    int i = 0;
+    while (i < size) {
+      a[x] = data[x];
+      i ++;
+      x ++;
+    }
+    end += 4; 
     data = a;
   }
 
@@ -48,14 +78,14 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException ("Null");
     }
-    if (start - 1 < 0) {
-      resize ();
-    }
     if (size == 0) {
       data[start] = element;
       size ++;
     }
     else {
+      if (start - 1 < 0) {
+        resizeLeft ();
+      }
       data[start - 1] = element;
       start --;
       size ++;
@@ -66,12 +96,18 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException ("Null");
     }
-    if (end + 1 > data.length) {
-      resize ();
+    if (size == 0) {
+      data[end] = element;
+      size ++;
     }
-    data[end + 1] = element;
-    end ++;
-    size ++;
+    else {
+      if (end + 1 >= data.length) {
+        resizeRight ();
+      }
+      data[end + 1] = element;
+      end ++;
+      size ++;
+    }
   }
 
   public E removeFirst(){
@@ -109,11 +145,29 @@ public class MyDeque<E>{
   }
 
   public static void main (String[] args) {
-    MyDeque <Integer> test = new MyDeque <> (10);
+    MyDeque <Integer> test = new MyDeque <> (5);
+    for (int i = 0; i <= 10; i ++) {
+      if (i % 2 == 0) {
+        test.addFirst (i);
+      }
+      else {
+        test.addLast (i);
+      }
+    }
+    System.out.println (test.toString ());
+    /*
     test.addFirst (1);
     test.addLast (2);
     test.addFirst (3);
     test.addLast (4);
     System.out.println (test.toString ());
+    test.removeFirst ();
+    System.out.println (test.toString ());
+    test.removeLast ();
+    System.out.println (test.toString ());
+    System.out.println (test.getFirst ());
+    System.out.println (test.getLast());
+    System.out.println (test.size ());
+    */
   }
 }
