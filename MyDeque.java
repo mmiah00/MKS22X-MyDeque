@@ -8,9 +8,9 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
-    int size = 0;
-    int start = data.length / 2;
-    int end = data.length / 2;
+    size = 0;
+    start = data.length / 2;
+    end = data.length / 2;
   }
 
   public int size(){
@@ -32,8 +32,8 @@ public class MyDeque<E>{
 
   @SuppressWarnings("unchecked")
   private void resize () {
-    E[] a = (E[]) new Object [size * 2 + 1];
-    int half = size/2;
+    E[] a = (E[]) new Object [size * 2 + data.length];
+    int half = a.length/2;
     int i = half;
     int x = start;
     while (i <= size) {
@@ -51,9 +51,15 @@ public class MyDeque<E>{
     if (start - 1 < 0) {
       resize ();
     }
-    data[start - 1] = element;
-    start --;
-    size ++;
+    if (size == 0) {
+      data[start] = element;
+      size ++;
+    }
+    else {
+      data[start - 1] = element;
+      start --;
+      size ++;
+    }
   }
 
   public void addLast(E element){
