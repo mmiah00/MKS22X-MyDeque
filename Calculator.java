@@ -9,6 +9,34 @@ public class Calculator{
     public static double eval(String s){
       String[] nums = s.split (" ");
       MyDeque <Double> a = new MyDeque <> (nums.length);
+      for (int i = 0; i < nums.length; i ++) {
+        if (Arrays.asList (operators).contains (nums[i])) {
+          Double second = a.removeLast ();
+          Double first = a.removeLast ();
+          if (nums[i].equals ("*")) {
+            a.addLast (first * second);
+          }
+          if (nums[i].equals ("/")) {
+            a.addLast (first / second);
+          }
+          if (nums[i].equals ("+")) {
+            a.addLast (first + second);
+          }
+          if (nums[i].equals ("-")) {
+            a.addLast (first - second);
+          }
+          if (nums[i].equals ("%")) {
+            a.addLast (first % second);
+          }
+          //pop last 2 numbers in the Deque
+          //do the operation
+          //then add to the deque
+        }
+        else {
+          a.addLast (Double.parseDouble (nums[i]));
+        }
+      }
+      /*
       for (int x = 2; x < nums.length; x ++) {
         if (Arrays.asList(operators).contains(nums[x])) {
           double first = Double.parseDouble (nums[x - 2]);
@@ -30,6 +58,7 @@ public class Calculator{
           }
         }
       }
+      */
       return a.getFirst ();
     }
 
