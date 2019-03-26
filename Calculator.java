@@ -30,7 +30,10 @@ public class Calculator{
           }
         }
       }
+      return a.getFirst ();
+    }
 
-      return 1.01;
+    public static void main (String[] args) {
+      System.out.println (eval ("1 18 + 2 5.5 6 - * *"));
     }
 }
