@@ -8,7 +8,7 @@ public class Calculator{
      */
     public static double eval(String s){
       String[] nums = s.split (" ");
-      MyDeque <Double> a = new MyDeque <> (nums.length);
+      MyDeque <Double> a = new MyDeque <Double> (nums.length);
       for (int i = 0; i < nums.length; i ++) {
         if (Arrays.asList (operators).contains (nums[i])) {
           Double second = a.removeLast ();
@@ -80,11 +80,27 @@ public class Calculator{
         if (Arrays.asList (operators).contains (ops[i])) { //if it is an operator
           Double second = ans.removeLast ();
           Double first = ans.removeLast ();
-          if (ops[i].equals ("%")){ ans.addLast (first % second); }
-          if (ops[i].equals ("+")){ ans.addLast (first + second); }
-          if (ops[i].equals ("-")){ ans.addLast (first - second); }
-          if (ops[i].equals ("/")){ ans.addLast (first / second); }
-          if (ops[i].equals ("*")){ ans.addLast (first * second); }
+          if (ops[i].equals ("%")){
+            ans.addLast (first % second);
+            System.out.println ("Mod: " + first + " % " + second);
+          }
+          if (ops[i].equals ("+")){
+            Double temp = first + second;
+            ans.addLast (temp);
+            System.out.println ("Adding: " + first + " + " + second);
+          }
+          if (ops[i].equals ("-")){
+            ans.addLast (first - second);
+            System.out.println ("Subtracting: " + first + " - " + second);
+          }
+          if (ops[i].equals ("/")){
+            ans.addLast (first / second);
+            System.out.println ("Dividing: " + first + " / " + second);
+          }
+          if (ops[i].equals ("*")){
+            ans.addLast (first * second);
+            System.out.println ("Multiplying: " + first + " * " + second);
+          }
         }
         else {
           ans.addLast (Double.parseDouble (ops[i]));
