@@ -63,40 +63,35 @@ public class Calculator{
       return a.getFirst ();
     }
 
+    private static String toString (String [] a) {
+      String ans = "[";
+      for (int x = 0 ; x < a.length; x ++) {
+        ans += a[x] + " ";
+      }
+      ans += "]";
+      return ans;
+    }
+
     public static void evalDebug(String s){
-      String[] nums = s.split (" ");
-      MyDeque <Double> a = new MyDeque <> (nums.length);
-      a.addLast (Double.parseDouble (nums[0]));
-      a.addLast (Double.parseDouble (nums[1]));
-      for (int i = 2; i < nums.length; i ++) {
-        if (Arrays.asList (operators).contains (nums[i])) {
-          Double second = a.removeLast ();
-          Double first = a.removeLast ();
-          if (nums[i].equals ("*")) {
-            a.addLast (first * second);
-          }
-          if (nums[i].equals ("/")) {
-            a.addLast (first / second);
-          }
-          if (nums[i].equals ("+")) {
-            a.addLast (first + second);
-          }
-          if (nums[i].equals ("-")) {
-            a.addLast (first - second);
-          }
-          if (nums[i].equals ("%")) {
-            a.addLast (first % second);
-          }
-          //pop last 2 numbers in the Deque
-          //do the operation
-          //then add to the deque
+      String[] ops = s.split (" ");
+      System.out.println ("Expression: " + toString (ops));
+      MyDeque <Double> ans = new MyDeque <> (ops.length);
+      for (int i = 0; i < ops.length; i ++) {
+        if (Arrays.asList (operators).contains (ops[i])) { //if it is an operator
+          Double second = ans.removeLast ();
+          Double first = ans.removeLast ();
+          if (ops[i].equals ("%")){ ans.addLast (first % second); }
+          if (ops[i].equals ("+")){ ans.addLast (first + second); }
+          if (ops[i].equals ("-")){ ans.addLast (first - second); }
+          if (ops[i].equals ("/")){ ans.addLast (first / second); }
+          if (ops[i].equals ("*")){ ans.addLast (first * second); }
         }
         else {
-          a.addLast (Double.parseDouble (nums[i]));
+          ans.addLast (Double.parseDouble (ops[i]));
         }
-        System.out.println (a);
+        System.out.println (ans.toString ());
       }
-      System.out.println (a);
+      System.out.println (ans.getFirst ());
     }
 
     public static void main (String[] args) {
