@@ -23,9 +23,10 @@ public class MyDeque<E>{
       if (data[i] != null) {
         ans += data[i] + " ";
       }
+      /*
       else {
         ans += "_ ";
-      }
+      }*/
     }
     return ans + "}";
   }
@@ -70,7 +71,7 @@ public class MyDeque<E>{
       i ++;
       x ++;
     }
-    end += 4; 
+    end += 4;
     data = a;
   }
 
@@ -152,6 +153,15 @@ public class MyDeque<E>{
       }
       else {
         test.addLast (i);
+      }
+    }
+    System.out.println (test.toString ());
+    for (int i = 0; i < test.size (); i ++) {
+      if (i % 2 == 0) {
+        test.removeFirst ();
+      }
+      else {
+        test.removeLast ();
       }
     }
     System.out.println (test.toString ());
