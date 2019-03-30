@@ -28,6 +28,7 @@ public class Calculator{
           if (nums[i].equals ("%")) {
             a.addLast (first % second);
           }
+          System.out.println ("Get first: " + a.getFirst ());
           //pop last 2 numbers in the Deque
           //do the operation
           //then add to the deque
@@ -107,7 +108,7 @@ public class Calculator{
         }
         System.out.println (ans.toString ());
       }
-      System.out.println (ans.getFirst ());
+      System.out.println (ans.getLast ());
     }
 
     public static void main (String[] args) {
