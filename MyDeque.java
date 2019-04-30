@@ -6,6 +6,11 @@ public class MyDeque<E>{
   private int size, start, end;
 
   @SuppressWarnings("unchecked")
+  public MyDeque(){
+    data = (E[])new Object[10];
+  }
+  
+  @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
     size = 0;
@@ -145,6 +150,7 @@ public class MyDeque<E>{
     return data[end];
   }
 
+  /*
   public static void main (String[] args) {
     MyDeque <Integer> test = new MyDeque <> (5);
     for (int i = 0; i <= 10; i ++) {
@@ -179,5 +185,5 @@ public class MyDeque<E>{
     System.out.println (test.getLast());
     System.out.println (test.size ());
     */
-  }
+  //}
 }
